@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,25 +15,28 @@
 
         <TextView
             android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="List of People"
             android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="587dp"
+        android:layout_height="493dp"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <ListView
+            android:id="@+id/listViewPeople"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -53,6 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="User Id :"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -60,7 +65,7 @@
                         android:id="@+id/textViewShowId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
+                        android:textAlignment="textStart"
                         android:textStyle="italic" />
                 </TableRow>
 
@@ -73,6 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Age :"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -80,7 +86,7 @@
                         android:id="@+id/textViewShowAge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
+                        android:textAlignment="textStart"
                         android:textStyle="italic" />
                 </TableRow>
 
@@ -93,14 +99,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Job :"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textViewShowAge"
+                        android:id="@+id/textViewShowJob"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
+                        android:textAlignment="textStart"
                         android:textStyle="italic" />
                 </TableRow>
 
@@ -113,6 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Salary :"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -120,7 +128,7 @@
                         android:id="@+id/textViewShowSalary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
+                        android:textAlignment="textStart"
                         android:textStyle="italic" />
                 </TableRow>
 
@@ -133,6 +141,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Program : "
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -140,7 +149,7 @@
                         android:id="@+id/textViewShowProgram"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
+                        android:textAlignment="textStart"
                         android:textStyle="italic" />
                 </TableRow>
             </TableLayout>
@@ -151,27 +160,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <Button
             android:id="@+id/buttonStudent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Student" />
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Student"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/buttonEmployee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Employee" />
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Employee"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/buttonAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="All" />
+            android:backgroundTint="@color/colorPrimary"
+            android:text="All"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>
