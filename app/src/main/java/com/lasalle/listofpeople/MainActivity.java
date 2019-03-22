@@ -33,15 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayAdapter<Person> personArrayAdapter;
     ArrayAdapter<Employee> employeeArrayAdapter;
     ArrayAdapter<Student> studentArrayAdapter;
-    typeUser flag;
-
-    private enum typeUser{
-        STUDENT,
-        EMPLOYEE,
-        PERSON;
-    }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,17 +72,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.buttonStudent:
                 studentArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listStudents);
                 listViewPeople.setAdapter(studentArrayAdapter);
-                flag = typeUser.STUDENT;
                 break;
             case R.id.buttonEmployee:
                 employeeArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listEmployees);
                 listViewPeople.setAdapter(employeeArrayAdapter);
-                flag = typeUser.EMPLOYEE;
                 break;
             case R.id.buttonAll:
                 personArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listPerson);
                 listViewPeople.setAdapter(personArrayAdapter);
-                flag = typeUser.PERSON;
                 break;
             default:
                 break;
@@ -146,11 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textViewJob.setText(listEmployees.get(position).getJob());
             textViewSalary.setText(String.valueOf(listEmployees.get(position).getSalary()));
         }
-//        textViewId.setText(listStudents.get(position).getStudentId());
-//        textViewAge.setText(String.valueOf(listStudents.get(position).getAge()));
-//        textViewJob.setText(listEmployees.get(position).getJob());
-//        textViewSalary.setText(String.valueOf(listEmployees.get(position).getSalary()));
-//        textViewProgram.setText(listStudents.get(position).getProgram());
+
 
     }
 }
