@@ -33,6 +33,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayAdapter<Person> personArrayAdapter;
     ArrayAdapter<Employee> employeeArrayAdapter;
     ArrayAdapter<Student> studentArrayAdapter;
+    typeUser flag;
+
+    private enum typeUser{
+        STUDENT,
+        EMPLOYEE,
+        PERSON;
+    }
 
 
 
@@ -63,24 +70,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listPerson = new ArrayList<>();
         fillUpStudent();
         fillUpEmployee();
+
     }
 
 
     @Override
     public void onClick(View v) {
+        cleanTextViews();
         switch(v.getId()){
             case R.id.buttonStudent:
                 studentArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listStudents);
                 listViewPeople.setAdapter(studentArrayAdapter);
+                flag = typeUser.STUDENT;
                 break;
             case R.id.buttonEmployee:
                 employeeArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listEmployees);
                 listViewPeople.setAdapter(employeeArrayAdapter);
+                flag = typeUser.EMPLOYEE;
                 break;
             case R.id.buttonAll:
-                fillUpAllUsers();
                 personArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listPerson);
                 listViewPeople.setAdapter(personArrayAdapter);
+                flag = typeUser.PERSON;
                 break;
             default:
                 break;
@@ -88,11 +99,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-    private void fillUpAllUsers(){
-        listPerson.addAll(listStudents);
-        listPerson.addAll(listEmployees);
-    }
 
 
     private void fillUpStudent() {
@@ -102,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listStudents.add(new Student("Carlos",19,"ad5632","Marketing"));
         listStudents.add(new Student("Emilie",28,"ad15555","Marketing"));
         listStudents.add(new Student("Nicole",35,"ad7865","Computer Science"));
+        listPerson.addAll(listStudents);
     }
 
 
@@ -112,14 +119,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listEmployees.add(new Employee("Carlos", 19, "tt5632", "Engineer", 90000));
         listEmployees.add(new Employee("Camila", 28, "tt15555", "Engineer", 95000));
         listEmployees.add(new Employee("Jaime", 35, "tt7865", "Carpenter", 70000));
+        listPerson.addAll(listEmployees);
 
+    }
+
+    private void cleanTextViews(){
+        textViewId.setText("");
+        textViewAge.setText("");
+        textViewProgram.setText("");
+        textViewId.setText("");
+        textViewJob.setText("");
+        textViewSalary.setText("");
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        textViewId.setText(listStudents.get(position).getStudentId());
-        textViewAge.setText(String.valueOf(listStudents.get(position).getAge()));
-        textViewProgram.setText(listStudents.get(position).getProgram());
+        Log.i("------------->",parent.getAdapter().getItem(position).getClass().toString());
+        if (parent.getAdapter().getItem(position).getClass().equals(Student.class)){
+            textViewId.setText(listStudents.get(position).getStudentId());
+            textViewAge.setText(String.valueOf(listStudents.get(position).getAge()));
+            textViewProgram.setText(listStudents.get(position).getProgram());
+        }else if (parent.getAdapter().getItem(position).getClass().equals(Employee.class)){
+            textViewId.setText(listEmployees.get(position).getEmpolyeeId());
+            textViewAge.setText(String.valueOf(listEmployees.get(position).getAge()));
+            textViewJob.setText(listEmployees.get(position).getJob());
+            textViewSalary.setText(String.valueOf(listEmployees.get(position).getSalary()));
+        }
+//        textViewId.setText(listStudents.get(position).getStudentId());
+//        textViewAge.setText(String.valueOf(listStudents.get(position).getAge()));
+//        textViewJob.setText(listEmployees.get(position).getJob());
+//        textViewSalary.setText(String.valueOf(listEmployees.get(position).getSalary()));
+//        textViewProgram.setText(listStudents.get(position).getProgram());
+
     }
 }
