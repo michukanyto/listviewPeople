@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    
+
     private void fillUpStudent() {
         listStudents.add(new Student("Philip",22,"ad1234","Marketing"));
         listStudents.add(new Student("Stefan",24,"ad4353","Computers Science"));
@@ -144,10 +144,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.i("------------->", String.valueOf(parent.getAdapter().getCount()));
         Student aStudent;
         Employee anEmployee;
+        Person aPerson = (Person) parent.getAdapter().getItem(position);
 
         if (flag) {
-//            Person aPerson = parent.getAdapter().getItem(position);
-            if (parent.getAdapter().getItem(position) instanceof Student) {
+
+            if (aPerson instanceof Student) {
                 aStudent = (Student)listPerson.get(position);
                 printOutData(aStudent.getStudentId(), aStudent.getAge(),BLANKSPACE,BLANKSPACE,aStudent.getProgram());
 
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else {
 
-            if (parent.getAdapter().getItem(position) instanceof Student) {
+            if (aPerson instanceof Student) {
                 aStudent = listStudents.get(position);
                 printOutData(aStudent.getStudentId(), aStudent.getAge(),BLANKSPACE,BLANKSPACE,aStudent.getProgram());
 
