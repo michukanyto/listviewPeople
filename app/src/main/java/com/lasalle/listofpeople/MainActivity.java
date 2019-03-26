@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final String BLANKSPACE = "";
     boolean flag;
 
-    
+
     private enum ListType{
         STUDENT,
         EMPLOYEE,
@@ -83,11 +83,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 studentArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listStudents);
                 listViewPeople.setAdapter(studentArrayAdapter);
                 listType = ListType.STUDENT;
+                flag = false;
                 break;
             case R.id.buttonEmployee:
                 employeeArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listEmployees);
                 listViewPeople.setAdapter(employeeArrayAdapter);
                 listType = ListType.EMPLOYEE;
+                flag = false;
                 break;
             case R.id.buttonAll:
                 personArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listPerson);
@@ -162,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 printOutData(anEmployee.getEmpolyeeId(),anEmployee.getAge(),anEmployee.getJob(),String.valueOf(anEmployee.getSalary()),BLANKSPACE);
             }
-            flag = false;
+
 
         } else {
 
