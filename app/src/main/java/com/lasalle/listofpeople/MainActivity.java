@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (flag) {
 //            Person aPerson = parent.getAdapter().getItem(position);
             if (parent.getAdapter().getItem(position) instanceof Student) {
-                Student aStudent =(Student)listPerson.get(position);
+                Student aStudent = (Student)listPerson.get(position);
                 textViewId.setText(aStudent.getStudentId());
                 textViewAge.setText(String.valueOf(aStudent.getAge()));
                 textViewProgram.setText(aStudent.getProgram());
@@ -159,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textViewSalary.setText(String.valueOf(anEmployee.getSalary()));
                 textViewProgram.setText(BLANKSPACE);
             }
+            flag = false;
 
         } else {
 
@@ -175,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
-//        flag = false;
+
     }
 
     @Override
