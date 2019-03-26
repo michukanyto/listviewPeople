@@ -10,16 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
-
 import model.Employee;
 import model.Person;
 import model.Student;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener,DialogInterface.OnClickListener {
+
     TextView textViewId;
     TextView textViewAge;
     TextView textViewJob;
@@ -39,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final String BLANKSPACE = "";
     boolean flag;
 
-
+    
     private enum ListType{
         STUDENT,
         EMPLOYEE,
@@ -143,39 +141,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.i("------------->", parent.getAdapter().getItem(position).getClass().toString());
         Log.i("------------->", String.valueOf(parent.getAdapter().getCount()));
+        Student aStudent;
+        Employee anEmployee;
         if (flag) {
 //            Person aPerson = parent.getAdapter().getItem(position);
             if (parent.getAdapter().getItem(position) instanceof Student) {
-                Student aStudent = (Student)listPerson.get(position);
-                textViewId.setText(aStudent.getStudentId());
-                textViewAge.setText(String.valueOf(aStudent.getAge()));
-                textViewProgram.setText(aStudent.getProgram());
+                aStudent = (Student)listPerson.get(position);
+//                textViewId.setText(aStudent.getStudentId());
+//                textViewAge.setText(String.valueOf(aStudent.getAge()));
+//                textViewProgram.setText(aStudent.getProgram());
+                printOutData(aStudent.getStudentId(), aStudent.getAge(),BLANKSPACE,BLANKSPACE,aStudent.getProgram());
 
             } else {
-                Employee anEmployee = (Employee)listPerson.get(position);
-                textViewId.setText(anEmployee.getEmpolyeeId());
-                textViewAge.setText(String.valueOf(anEmployee.getAge()));
-                textViewJob.setText(anEmployee.getJob());
-                textViewSalary.setText(String.valueOf(anEmployee.getSalary()));
-                textViewProgram.setText(BLANKSPACE);
+                anEmployee = (Employee)listPerson.get(position);
+//                textViewId.setText(anEmployee.getEmpolyeeId());
+//                textViewAge.setText(String.valueOf(anEmployee.getAge()));
+//                textViewJob.setText(anEmployee.getJob());
+//                textViewSalary.setText(String.valueOf(anEmployee.getSalary()));
+//                textViewProgram.setText(BLANKSPACE);
+
+                printOutData(anEmployee.getEmpolyeeId(),anEmployee.getAge(),anEmployee.getJob(),String.valueOf(anEmployee.getSalary()),BLANKSPACE);
             }
             flag = false;
 
         } else {
 
             if (parent.getAdapter().getItem(position) instanceof Student) {
-                textViewId.setText(listStudents.get(position).getStudentId());
-                textViewAge.setText(String.valueOf(listStudents.get(position).getAge()));
-                textViewProgram.setText(listStudents.get(position).getProgram());
+                aStudent = (Student) listStudents.get(position);
+//                textViewId.setText(aStudent.getStudentId());
+//                textViewAge.setText(String.valueOf(aStudent.getAge()));
+//                textViewProgram.setText(aStudent.getProgram());
+                printOutData(aStudent.getStudentId(), aStudent.getAge(),BLANKSPACE,BLANKSPACE,aStudent.getProgram());
+
 
             } else {
-                textViewId.setText(listEmployees.get(position).getEmpolyeeId());
-                textViewAge.setText(String.valueOf(listEmployees.get(position).getAge()));
-                textViewJob.setText(listEmployees.get(position).getJob());
-                textViewSalary.setText(String.valueOf(listEmployees.get(position).getSalary()));
+                anEmployee = (Employee) listEmployees.get(position);
+//                textViewId.setText(anEmployee .getEmpolyeeId());
+//                textViewAge.setText(String.valueOf(anEmployee .getAge()));
+//                textViewJob.setText(anEmployee .getJob());
+//                textViewSalary.setText(String.valueOf(anEmployee .getSalary()));
+                printOutData(anEmployee.getEmpolyeeId(),anEmployee.getAge(),anEmployee.getJob(),String.valueOf(anEmployee.getSalary()),BLANKSPACE);
             }
 
         }
+
+    }
+
+    private void printOutData (String userId,int age,String job,String salary,String program){
+        textViewId.setText(userId);
+        textViewAge.setText(String.valueOf(age));
+        textViewJob.setText(job);
+        textViewSalary.setText(salary);
+        textViewProgram.setText(program);
 
     }
 
