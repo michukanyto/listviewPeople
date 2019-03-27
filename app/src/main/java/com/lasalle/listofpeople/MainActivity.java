@@ -1,6 +1,8 @@
 package com.lasalle.listofpeople;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,10 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayAdapter<Student> studentArrayAdapter;
     ListType listType;
     final String BLANKSPACE = "";
-    boolean flag;
+    int currentPosition;
+    AlertDialog.Builder alertDialog;
 
 
-    private enum ListType{
+
+    public enum ListType{
         STUDENT,
         EMPLOYEE,
         PERSON;
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void initialize() {
+    public void initialize() {
         textViewId = findViewById(R.id.textViewShowId);
         textViewAge = findViewById(R.id.textViewShowAge);
         textViewJob = findViewById(R.id.textViewShowJob);
@@ -64,13 +68,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonStudent.setOnClickListener(this);
         buttonEmployee.setOnClickListener(this);
         buttonAll.setOnClickListener(this);
+
         listViewPeople = findViewById(R.id.listViewPeople);
         listViewPeople.setOnItemClickListener(this);
+        listViewPeople.setOnItemLongClickListener(this);
+
         listStudents = new ArrayList<>();
         listEmployees = new ArrayList<>();
         listPerson = new ArrayList<>();
+
         fillUpStudent();
         fillUpEmployee();
+
+
+        alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Delete");
+        alertDialog.setMessage("Do you want to delete (Y/N) ");
+        alertDialog.setPositiveButton("Yes",this);
+        alertDialog.setNegativeButton("No",this);
 
     }
 
@@ -83,20 +98,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 studentArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listStudents);
                 listViewPeople.setAdapter(studentArrayAdapter);
                 listType = ListType.STUDENT;
-                flag = false;
+                studentArrayAdapter.notifyDataSetChanged();
+
                 break;
             case R.id.buttonEmployee:
                 employeeArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listEmployees);
                 listViewPeople.setAdapter(employeeArrayAdapter);
+                employeeArrayAdapter.notifyDataSetChanged();
                 listType = ListType.EMPLOYEE;
-                flag = false;
+
                 break;
             case R.id.buttonAll:
                 personArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listPerson);
                 Log.i("List Size ===> ",String.valueOf(listPerson.size()));
                 listViewPeople.setAdapter(personArrayAdapter);
                 listType = ListType.PERSON;
-                flag = true;
+                personArrayAdapter.notifyDataSetChanged();
+
                 break;
             default:
                 break;
@@ -105,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void fillUpStudent() {
+    public void fillUpStudent() {
         listStudents.add(new Student("Philip",22,"ad1234","Marketing"));
         listStudents.add(new Student("Stefan",24,"ad4353","Computers Science"));
         listStudents.add(new Student("Loise",20,"ad3322","Medicine"));
@@ -117,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void fillUpEmployee() {
+    public void fillUpEmployee() {
         listEmployees.add(new Employee("Andrew", 22, "tt1234", "Engineer", 100000));
         listEmployees.add(new Employee("Julian", 45, "tt4353", "Networking", 70000));
         listEmployees.add(new Employee("Brandon", 20, "tt3322", "Medicine", 150000));
@@ -128,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.i("List Size ===> ",String.valueOf(listPerson.size()));
     }
 
-    private void cleanTextViews(){
+    public void cleanTextViews(){
         textViewId.setText(BLANKSPACE);
         textViewAge.setText(BLANKSPACE);
         textViewProgram.setText(BLANKSPACE);
@@ -146,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Employee anEmployee;
         Person aPerson = (Person) parent.getAdapter().getItem(position);
 
-        if (flag) {
+        if (listType == ListType.PERSON) {
 
             if (aPerson instanceof Student) {
                 aStudent = (Student)listPerson.get(position);
@@ -173,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void printOutData (String userId,int age,String job,String salary,String program){
+    public void printOutData (String userId,int age,String job,String salary,String program){
         textViewId.setText(userId);
         textViewAge.setText(String.valueOf(age));
         textViewJob.setText(job);
@@ -184,12 +202,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        currentPosition = position;
+        AlertDialog dialogBox = alertDialog.create();
+        dialogBox.show();
+        Log.i("------------->", "in ItemLongClick");
         return false;
+
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
+        switch (which){
+            case Dialog.BUTTON_POSITIVE:
+                Log.i("------------->", "testing button inside pop up");
+                deleteUserFromList();
+                break;
 
+            case Dialog.BUTTON_NEGATIVE:
+                break;
+        }
+
+    }
+
+    public void deleteUserFromList(){
+        if (listType == ListType.STUDENT){
+            listStudents.remove(currentPosition);
+            studentArrayAdapter.notifyDataSetChanged();
+        }else if(listType == ListType.EMPLOYEE){
+            listEmployees.remove(currentPosition);
+            employeeArrayAdapter.notifyDataSetChanged();
+        }else if (listType == ListType.PERSON){
+            listPerson.remove(currentPosition);
+            personArrayAdapter.notifyDataSetChanged();
+        }
     }
 
 }
