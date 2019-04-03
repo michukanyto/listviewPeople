@@ -234,6 +234,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if (listType == ListType.PERSON){
             listPerson.remove(currentPosition);
             personArrayAdapter.notifyDataSetChanged();
+            if(currentPosition < listStudents.size()){
+                listStudents.remove(currentPosition);
+            }else{
+                listEmployees.remove(currentPosition - listStudents.size());
+            }
+            employeeArrayAdapter.notifyDataSetChanged();
         }
     }
 
