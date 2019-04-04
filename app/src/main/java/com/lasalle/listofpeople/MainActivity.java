@@ -222,22 +222,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void deleteUserFromList(){
+        Person aPerson;
+        Student aStudent;
+        Employee anEmployee;
+
         if (listType == ListType.STUDENT){
             listStudents.remove(currentPosition);
             studentArrayAdapter.notifyDataSetChanged();
+
         }else if(listType == ListType.EMPLOYEE){
             listEmployees.remove(currentPosition);
             employeeArrayAdapter.notifyDataSetChanged();
+
         }else if (listType == ListType.PERSON){
             listPerson.remove(currentPosition);
+            personArrayAdapter.notifyDataSetChanged();
+
             if(currentPosition < listStudents.size()){
                 listStudents.remove(currentPosition);
+
             }else{
                 listEmployees.remove(currentPosition - listStudents.size());
+
             }
-            personArrayAdapter.notifyDataSetChanged();
+
         }
     }
 
-}
 
+}
