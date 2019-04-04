@@ -1,0 +1,12 @@
+S,Philip,22,ad1234,Marketing
+S,Stefan,24,ad4353,Computers Science
+S,Loise,20,ad3322,Medicine
+S,Carlos,19,ad5632,Marketing
+S,Emilie,28,ad15555,Marketing
+S,Nicole,35,ad7865,Computer Science
+E,Andrew,22,tt1234,Engineer,100000
+E,Julian,45,tt4353,Networking,70000
+E,Brandon,20,tt3322,Medicine,150000
+E,Carlos,19,tt5632,Engineer,90000
+E,Camila,28,tt15555,Engineer,95000
+E,Jaime,35,tt7865,Carpenter,70000
