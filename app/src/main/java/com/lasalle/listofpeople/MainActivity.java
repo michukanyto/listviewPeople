@@ -78,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listEmployees = new ArrayList<>();
         listPerson = new ArrayList<>();
 
-//        fillUpStudent();
-//        fillUpEmployee();
 
         listPerson = FilePeopleManagment.readFile(this,"person");
         Log.i("# people --- ", String.valueOf(listPerson.size()));
@@ -144,32 +142,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
-//    public void fillUpStudent() {
-//
-//        listStudents = FilePeopleManagment.readFileStudent(this,"students");
-////        listStudents.add(new Student("Philip",22,"ad1234","Marketing"));
-////        listStudents.add(new Student("Stefan",24,"ad4353","Computers Science"));
-////        listStudents.add(new Student("Loise",20,"ad3322","Medicine"));
-////        listStudents.add(new Student("Carlos",19,"ad5632","Marketing"));
-////        listStudents.add(new Student("Emilie",28,"ad15555","Marketing"));
-////        listStudents.add(new Student("Nicole",35,"ad7865","Computer Science"));
-//        listPerson.addAll(listStudents);
-//        Log.i("List Size ===> ",String.valueOf(listPerson.size()));
-//    }
-//
-//
-//    public void fillUpEmployee() {
-//        listEmployees = FilePeopleManagment.readFileEmployee(this,"employees");
-////        listEmployees.add(new Employee("Andrew", 22, "tt1234", "Engineer", 100000));
-////        listEmployees.add(new Employee("Julian", 45, "tt4353", "Networking", 70000));
-////        listEmployees.add(new Employee("Brandon", 20, "tt3322", "Medicine", 150000));
-////        listEmployees.add(new Employee("Carlos", 19, "tt5632", "Engineer", 90000));
-////        listEmployees.add(new Employee("Camila", 28, "tt15555", "Engineer", 95000));
-////        listEmployees.add(new Employee("Jaime", 35, "tt7865", "Carpenter", 70000));
-//        listPerson.addAll(listEmployees);
-//        Log.i("List Size ===> ",String.valueOf(listPerson.size()));
-//    }
 
     public void cleanTextViews(){
         textViewId.setText(BLANKSPACE);
@@ -258,15 +230,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             employeeArrayAdapter.notifyDataSetChanged();
         }else if (listType == ListType.PERSON){
             listPerson.remove(currentPosition);
-            personArrayAdapter.notifyDataSetChanged();
             if(currentPosition < listStudents.size()){
                 listStudents.remove(currentPosition);
-                employeeArrayAdapter.notifyDataSetChanged();
             }else{
                 listEmployees.remove(currentPosition - listStudents.size());
-                employeeArrayAdapter.notifyDataSetChanged();
             }
-
+            personArrayAdapter.notifyDataSetChanged();
         }
     }
 
